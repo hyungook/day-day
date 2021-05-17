@@ -7,7 +7,6 @@ const Login = (props) => {
         <div>
             <h1>Day Mood Login</h1>
             <GoogleButton />
-            {/* <KakaoSignUp /> */}
             {/* <KakaoLogin /> */}
         </div>
     )
