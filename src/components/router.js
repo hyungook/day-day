@@ -8,7 +8,7 @@ const Auth = () => {
     const onSocialClick = async (event) => {
         // console.log(event.target.name);
         const {target: {name}} = event;
-        
+
         let provider;
         if(name === 'google') {
             provider = new firebaseInstance.auth.GoogleAuthProvider();
@@ -18,7 +18,6 @@ const Auth = () => {
         const data = await authService.signInWithPopup(provider);
         console.log(data);
     }
-    
     return (
         <div className="authContainer">
             <FontAwesomeIcon icon={faTwitter} color={"#04AAFF"} size="3x" style={{ marginBottom: 30 }} />
