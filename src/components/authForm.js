@@ -17,6 +17,7 @@ const AuthForm = (props) => {
             setPassword(value);
         }
     };
+    
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
