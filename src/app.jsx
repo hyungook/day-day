@@ -1,50 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import AppRouter from './router';
-import { authService } from '../firebase';
+import Auth from 'components/routes/auth';
+import React, { useState } from 'react';
+// import { Router, Route, Switch } from "react-router-dom";
+// location 오류를 해결하기 위해 아래와 같이 코드 수정
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './components/login/login';
+import firebase, {authService} from './firebase';
 
-function App() {
-  // const auth = firebase.auth();
-  // console.log(authService.currentUser);
-
-  const [init, setInit] = useState(false);
-  // 로그인 여부를 확인할 수 있다
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState(null);
+const App = () => {
   
-  // console.log(authService.currentUser);
-  
-useEffect(() => {
-    authService.onAuthStateChanged((user) => {
-      if(user) {
-        setUserObj({
-          displayName: user.displayName,
-          uid:user.uid,
-          updateProfile: (args) => user.updateProfile(args)
-        });
-        // setUserObj(user);
-      } else {
-        setUserObj(null);  //  logout
-      }
-      setInit(true);
-    })
-  },[]);
-
-  const refreshUser = () => {
-    const user = authService.currentUser;
-    setUserObj(
-      {
-      displayName: user.displayName,
-      uid:user.uid,
-      updateProfile: (args) => user.updateProfile(args)
-    }
-    // Object.assign({},user));
-    )}
+  // 현재 사용자 정보
+  console.log(authService.currentUser)
+  // 현재 사용자를 useState에 넣는다
+  const [isSignIn, setSignIn] = useState(authService.currentUser);
 
   return (
-  <>
-    {init ? <AppRouter refreshUser={refreshUser} isLoggedIn={Boolean(userObj)} userObj={userObj} />
-         : "Initializing..." }
-  </>);
+    <>
+      <Router>
+        <Switch>
+          {isSignIn ? (
+            <>
+              {/* <Route exact path="/"> */}
+                home
+              {/* </Route> */}
+            </>
+          ) : (
+            <Route exact path="/">
+              <Auth />
+            </Route>
+          )}
+        </Switch>
+      </Router>
+      {/* <Login isSignIn={isSignIn}/> */}
+      <footer>&copy; {new Date().getFullYear()} Day Mood</footer>
+    </>
+  );
 }
 
 export default App;

@@ -1,34 +1,38 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faTwitter,faGoogle,faGithub,} from "@fortawesome/free-brands-svg-icons";
-import AuthForm from '../components/authForm';
-import { authService, firebaseInstance } from '../firebase';
+import React, { useState } from "react";
 
 const Auth = () => {
-    const onSocialClick = async (event) => {
-        // console.log(event.target.name);
-        const {target: {name}} = event;
-        
-        let provider;
-        if(name === 'google') {
-            provider = new firebaseInstance.auth.GoogleAuthProvider();
-        } else if(name === 'github') {
-            provider = new firebaseInstance.auth.GithubAuthProvider();
+
+    const [email, setEmail] = useState("");
+    const [passWord, setPassWord] = useState("");
+
+    const onChange = (event) => {
+        // 쉽게 Form을 컨트롤 할 수 있는 방법
+        // console.log(event.target.name)
+        const {target:{name, value},} = event;
+        if (name === "email") {
+            setEmail(value);
+        } else if (name === "password") {
+            setPassWord(value);
         }
-        const data = await authService.signInWithPopup(provider);
-        console.log(data);
+    }
+
+    const onSubmit = (event) =>{
+        event.preventDefault();
     }
     
-    return (
-        <div className="authContainer">
-            <FontAwesomeIcon icon={faTwitter} color={"#04AAFF"} size="3x" style={{ marginBottom: 30 }} />
-            <AuthForm />
-            <div className="authBtns">
-                <button onClick={onSocialClick} name="google" className="authBtn">
-                    Continue with Google <FontAwesomeIcon icon={faGoogle} />
+    return ( 
+        <div>
+            <form onSubmit={onSubmit}>
+                <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange} />
+                <input name="password" type="password" placeholder="Password" required value={passWord} onChange={onChange} />
+                <input type="submit" value='Login' />
+            </form>
+            <div>
+                <button name="google">
+                    Continue with Google
                 </button>
-                <button onClick={onSocialClick} name="github" className="authBtn">
-                    Continue with Github <FontAwesomeIcon icon={faGithub} />
+                <button name="github">
+                    Continue with Github
                 </button>
             </div>
         </div>
