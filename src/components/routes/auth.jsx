@@ -6,7 +6,8 @@ const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     // 
-    const [newAccount, setAccount] = useState(true);
+    const [newAccount, setNewAccount] = useState(true);
+    const [error, setError] = useState("");
 
     const onChange = (event) => {
         // 쉽게 Form을 컨트롤 할 수 있는 방법
@@ -20,13 +21,11 @@ const Auth = () => {
     }
 
     const onSubmit = async(event) =>{
-        
         event.preventDefault();
+        
 
         try {
-
             let data;
-
             if(newAccount) {
                 // create account
                 // 계정이 없을 때 새로운 계정 생성
@@ -34,13 +33,21 @@ const Auth = () => {
             } else {
                 // sign in
                 data = await authService.signInWithEmailAndPassword(email, password)
-            console.log(data);
+                console.log(data);
             }
+            console.log(data);
         } catch (error) {
             console.log(error);
+            console.log(error.code);
+            console.log(error.message);
+            setError(error.message);
         }
-        
     }
+
+    const toggleAccount = () => {
+        setNewAccount((prev) => !prev);
+    }
+    
     
     return ( 
         <div>
@@ -48,8 +55,10 @@ const Auth = () => {
                 <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange} />
                 <input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} />
                 <input type="submit" value={newAccount ? "Create Account" : "Sign In"} />
+                {error}
             </form>
             <div>
+            <span onClick={toggleAccount}>{newAccount ? "Sign in" : "Create Account"}</span>
                 <button name="google">
                     Continue with Google
                 </button>
