@@ -50,9 +50,8 @@ const App = () => {
           )}
         </Switch>
       </Router> */}
-      <Auth />
-      {init ? <AppRouter /> : "Initializing ..."}
-      {/* <Login isSignIn={isSignIn}/> */}
+      {/* <Auth /> */}
+      {init ? <AppRouter isSignIn={isSignIn} /> : "Initializing ..."}
       <footer>&copy; {new Date().getFullYear()} Day Mood</footer>
     </>
   );
