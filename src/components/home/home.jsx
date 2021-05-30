@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { dbService } from '../../firebase'
 
 const Home = (props) => {
 
     const [day, setDay] = useState("");
 
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
         event.preventDefault()
-        console.log(day)
+        await dbService.collection("dayday").add({
+            day:day,
+            createdAt: Date.now(),
+        })
+        setDay("")
+        // console.log(day)
     }
 
     const onChange = (event) => {
