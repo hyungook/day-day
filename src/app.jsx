@@ -18,6 +18,8 @@ const App = () => {
   // const [isSignIn, setSignIn] = useState(authService.currentUser);
   const [isSignIn, setSignIn] = useState(false);
   
+  const [userObj, setUserObj] = useState(null);
+
   // setInterval(() => {
   //   console.log(authService.currentUser);
   // },2000)
@@ -27,11 +29,12 @@ const App = () => {
     authService.onAuthStateChanged((user) => {
       console.log(user);
       if (user) {
-        setSignIn(true)
+        setSignIn(true);
+        setUserObj(user);
       } else {
-        setSignIn(false)
+        setSignIn(false);
       }
-      setInit(true)
+      setInit(true);
     })
   },[])
 
@@ -51,7 +54,7 @@ const App = () => {
         </Switch>
       </Router> */}
       {/* <Auth /> */}
-      {init ? <AppRouter isSignIn={isSignIn} /> : "Initializing ..."}
+      {init ? <AppRouter isSignIn={isSignIn} userObj={userObj}/> : "Initializing ..."}
       <footer>&copy; {new Date().getFullYear()} Day Mood</footer>
     </>
   );
