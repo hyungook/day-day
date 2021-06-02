@@ -1,3 +1,4 @@
+import Day from 'components/day/day';
 import React, { useEffect, useState } from 'react';
 import { dbService } from '../../firebase'
 
@@ -8,7 +9,6 @@ const Home = ({ userObj }) => {
 
     const [day, setDay] = useState("");
     const  [days, setDays] = useState([]);
-
 
     // forEach 방식
     // const getDays = async() => {
@@ -29,7 +29,6 @@ const Home = ({ userObj }) => {
     //         setDays((prev) => [dayObject, ...prev])
     //     })
     // }
-
 
     useEffect(() => {
         // getDays();
@@ -71,9 +70,8 @@ const Home = ({ userObj }) => {
         </form>
         <div>
             {days.map(day => (
-                <div key={day.id}>
-                    <h4>{day.text}</h4>
-                </div>
+                // isOwner={day.creatorId === userObj} = 로그인 정보 대조
+                <Day key={day.id} dayObj={day} isOwner={day.creatorId === userObj.uid} />
             ))}
         </div>
     </div>
