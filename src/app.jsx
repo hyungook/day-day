@@ -13,7 +13,8 @@ const App = () => {
   const [init, setInit] = useState(false);
 
   // 현재 사용자 정보
-  console.log(authService.currentUser)
+  // console.log(authService.currentUser)
+  
   // 현재 사용자를 useState에 넣는다
   // const [isSignIn, setSignIn] = useState(authService.currentUser);
   const [isSignIn, setSignIn] = useState(false);

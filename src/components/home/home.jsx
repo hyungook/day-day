@@ -9,6 +9,7 @@ const Home = ({ userObj }) => {
 
     const [day, setDay] = useState("");
     const  [days, setDays] = useState([]);
+    const [attachment, setAttachment] = useState();
 
     // forEach 방식
     // const getDays = async() => {
@@ -63,10 +64,37 @@ const Home = ({ userObj }) => {
 
     // console.log(days)
 
+    const onFileChange = (event) => {
+        const {target:{files},} = event;
+        const theFile = files[0];
+
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => {
+            console.log(finishedEvent)
+            const {currentTarget:{result},} = finishedEvent;
+            setAttachment(result);
+        }
+        reader.readAsDataURL(theFile);
+
+        // console.log(event.target.files)
+        // console.log(theFile)
+    };
+
+    const clearAttachment = () => {
+        setAttachment(null)
+    };
+
     return <div>
         <form onSubmit={onSubmit}>
             <input value={day} onChange={onChange} type="text" placeholder="" maxLength={120} />
+            <input type="file" accept="image/*" onChange={onFileChange} />
             <input type="submit" value="diary" />
+            {attachment && (
+                <div>
+                    <img src={attachment} width="50px" height="50px" />
+                    <button onClick={clearAttachment}>Cancel upload</button>
+                </div>
+            ) }
         </form>
         <div>
             {days.map(day => (
