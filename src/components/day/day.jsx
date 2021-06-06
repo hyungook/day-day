@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { dbService } from '../../firebase'
+import { dbService, storageService } from '../../firebase'
 
 const Day = ({dayObj, isOwner}) => {
 
@@ -14,6 +14,7 @@ const Day = ({dayObj, isOwner}) => {
         if (ok) {
             // delete
             await dbService.doc(`dayday/${dayObj.id}`).delete();
+            await storageService.refFromURL(dayObj.attachmentUrl).delete();
         }
     }
 
@@ -47,6 +48,7 @@ const Day = ({dayObj, isOwner}) => {
                 ) : (
                     <>
                         <h4>{dayObj.text}</h4>
+                        {dayObj.attachmentUrl && <img src={dayObj.attachmentUrl} width="50px" height="50px" />}
                         {isOwner && (
                             <>
                                 <button onClick={onDeleteClick}>Delete</button>

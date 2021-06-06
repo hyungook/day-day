@@ -1,6 +1,7 @@
 import Day from 'components/day/day';
 import React, { useEffect, useState } from 'react';
-import { dbService } from '../../firebase'
+import { dbService, storageService } from '../../firebase'
+import {v4 as uuidv4} from 'uuid';
 
 const Home = ({ userObj }) => {
 
@@ -48,12 +49,32 @@ const Home = ({ userObj }) => {
 
     const onSubmit = async (event) => {
         event.preventDefault()
-        await dbService.collection("dayday").add({
+
+        let attachmentUrl = ""
+        
+        if(attachment !== "") {
+            const attachmentRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`)
+            const response =  await attachmentRef.putString(attachment, "data_url")
+            // console.log(await response.ref.getDownloadURL())
+            attachmentUrl = await response.ref.getDownloadURL()
+            
+        }
+        const dayObj = {
             text:day,
             createdAt: Date.now(),
             creatorId: userObj.uid,
-        })
+            attachmentUrl,
+        }
+        await dbService.collection("dayday").add(dayObj)
         setDay("")
+        setAttachment("");
+
+        // await dbService.collection("dayday").add({
+        //     text:day,
+        //     createdAt: Date.now(),
+        //     creatorId: userObj.uid,
+        // })
+        // setDay("")
         // console.log(day)
     }
 
