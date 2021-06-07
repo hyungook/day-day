@@ -7,11 +7,11 @@ import Navigation from './navigation/navigation';
 import Profile from './profile/profile';
 import Auth from './routes/auth';
 
-const AppRouter =  ({isSignIn, userObj}) => {
+const AppRouter =  ({refreshUser, isSignIn, userObj}) => {
     
     return(
         <Router>
-            {isSignIn && <Navigation />}
+            {isSignIn && <Navigation userObj={userObj} />}
             <Switch>
                 {isSignIn ? (
                 <div>
@@ -19,7 +19,7 @@ const AppRouter =  ({isSignIn, userObj}) => {
                         <Home userObj={userObj} />
                     </Route>
                     <Route exact path="/profile">
-                        <Profile />
+                        <Profile userObj={userObj} refreshUser={refreshUser} />
                     </Route>
                     <Redirect from="*" to="/" />
                 </div>) : (

@@ -10,7 +10,7 @@ const Home = ({ userObj }) => {
 
     const [day, setDay] = useState("");
     const  [days, setDays] = useState([]);
-    const [attachment, setAttachment] = useState();
+    const [attachment, setAttachment] = useState("");
 
     // forEach 방식
     // const getDays = async() => {
@@ -57,14 +57,15 @@ const Home = ({ userObj }) => {
             const response =  await attachmentRef.putString(attachment, "data_url")
             // console.log(await response.ref.getDownloadURL())
             attachmentUrl = await response.ref.getDownloadURL()
-            
         }
+
         const dayObj = {
             text:day,
             createdAt: Date.now(),
             creatorId: userObj.uid,
             attachmentUrl,
         }
+
         await dbService.collection("dayday").add(dayObj)
         setDay("")
         setAttachment("");

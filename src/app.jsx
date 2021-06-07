@@ -28,16 +28,42 @@ const App = () => {
   useEffect(() => {
     // event listenr, 유저 상태에 변화가 있을 때 그 변화를 알아차린다.
     authService.onAuthStateChanged((user) => {
-      console.log(user);
+      // console.log(user);
       if (user) {
         setSignIn(true);
-        setUserObj(user);
+        // setUserObj(user);
+
+        setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+          updateProfile: (args) => user.updateProfile(args),
+        });
+
+        // setUserObj(user);
+
       } else {
         setSignIn(false);
       }
       setInit(true);
     })
   },[])
+
+  const refreshUser = () => {
+    // setUserObj(authService.currentUser)
+    const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid:user.uid,
+      updateProfile: (args) => user.updateProfile(args)
+    })
+
+    // setUserObj(Object.assign({}, user));
+    // Object.assign 은 target과 source가 요구된다.
+    // 기본적으로 빈 object 와 source가 필요하다. 결과적으로 빈 object 안에 원래 user의 사본이 새 obejct의 형태로 생성된다.
+    // 그렇기 때문에 react에서 반응하여 랜더링 된다. // 비추천
+
+    // console.log(authService.currentUser.displayName)
+  }
 
   return (
     <>
@@ -55,7 +81,7 @@ const App = () => {
         </Switch>
       </Router> */}
       {/* <Auth /> */}
-      {init ? <AppRouter isSignIn={isSignIn} userObj={userObj}/> : "Initializing ..."}
+      {init ? <AppRouter refreshUser={refreshUser} isSignIn={isSignIn} userObj={userObj}/> : "Initializing ..."}
       <footer>&copy; {new Date().getFullYear()} Day Day</footer>
     </>
   );
