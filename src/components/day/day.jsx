@@ -49,6 +49,7 @@ const Day = ({dayObj, isOwner}) => {
                     <>
                         <h4>{dayObj.text}</h4>
                         {dayObj.attachmentUrl && <img src={dayObj.attachmentUrl} width="50px" height="50px" />}
+                        {dayObj.date}
                         {isOwner && (
                             <>
                                 <button onClick={onDeleteClick}>Delete</button>

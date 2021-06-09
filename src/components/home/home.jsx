@@ -2,6 +2,9 @@ import Day from 'components/day/day';
 import React, { useEffect, useState } from 'react';
 import { dbService, storageService } from '../../firebase'
 import {v4 as uuidv4} from 'uuid';
+import styles from './home.module.css';
+
+
 
 const Home = ({ userObj }) => {
 
@@ -47,6 +50,15 @@ const Home = ({ userObj }) => {
 
     }, [])
 
+    let today = new Date();   
+
+    let year = today.getFullYear(); // 년도
+    let month = today.getMonth() + 1;  // 월
+    let date = today.getDate();  // 날짜
+    // let theDay = today.getDay();  // 요일
+
+    // console.log(year + '/' + month + '/' + date)
+
     const onSubmit = async (event) => {
         event.preventDefault()
 
@@ -64,6 +76,7 @@ const Home = ({ userObj }) => {
             createdAt: Date.now(),
             creatorId: userObj.uid,
             attachmentUrl,
+            date: year + '.' + month + '.' + date,
         }
 
         await dbService.collection("dayday").add(dayObj)
@@ -108,7 +121,7 @@ const Home = ({ userObj }) => {
 
     return <div>
         <form onSubmit={onSubmit}>
-            <input value={day} onChange={onChange} type="text" placeholder="" maxLength={120} />
+            <input value={day} onChange={onChange} type="text" placeholder="" maxLength={500} />
             <input type="file" accept="image/*" onChange={onFileChange} />
             <input type="submit" value="diary" />
             {attachment && (

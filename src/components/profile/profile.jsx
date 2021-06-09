@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { authService, dbService } from '../../firebase'
 import { useHistory } from 'react-router-dom';
-// import { authService } from 'firebase';
 
 const Profile = ({refreshUser, userObj}) => {
 
