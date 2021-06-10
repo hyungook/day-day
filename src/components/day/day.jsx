@@ -6,7 +6,6 @@ const Day = ({dayObj, isOwner}) => {
     const [editing, setEditing] = useState(false);
     const [newDay, setNewDay] = useState(dayObj.text);
 
-
     const onDeleteClick = async() => {
         const ok = window.confirm("Are you want to delete this day?");
         // console.log(ok)

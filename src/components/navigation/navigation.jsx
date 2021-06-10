@@ -9,11 +9,13 @@ const Navigation = ({userObj}) => {
                 <Link to="/">Home</Link>
             </li>
             <li>
+                <Link to="/calendar">My Day</Link>
+            </li>
+            <li>
                 <Link to="/profile">{userObj.displayName}의 Profile</Link>
             </li>
         </ul>
     </nav>
-    
 }
 
 export default Navigation;
