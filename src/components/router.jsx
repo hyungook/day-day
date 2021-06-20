@@ -5,6 +5,7 @@ import Myday from './MyDay/myday';
 import Navigation from './navigation/navigation';
 import Profile from './profile/profile';
 import Auth from './routes/auth';
+import styles from './router.module.css';
 
 const AppRouter =  ({refreshUser, isSignIn, userObj}) => {
     
@@ -13,7 +14,7 @@ const AppRouter =  ({refreshUser, isSignIn, userObj}) => {
             {isSignIn && <Navigation userObj={userObj} />}
             <Switch>
                 {isSignIn ? (
-                <div>
+                <div className={styles.wrap}>
                     <Route exact path="/">
                         <Home userObj={userObj} />
                     </Route>

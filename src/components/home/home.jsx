@@ -119,9 +119,15 @@ const Home = ({ userObj }) => {
         setAttachment(null)
     };
 
-    return <div>
-        <form onSubmit={onSubmit}>
-            <input value={day} onChange={onChange} type="text" placeholder="" maxLength={500} />
+    return <div className={styles.container}>
+        <div className={styles.days}>
+            {days.map(day => (
+                // isOwner={day.creatorId === userObj} = 로그인 정보 대조
+                <Day key={day.id} dayObj={day} isOwner={day.creatorId === userObj.uid} />
+            ))}
+        </div>
+        <form onSubmit={onSubmit} className={styles.dayForm}>
+            <input className={styles.dayText} value={day} onChange={onChange} type="text" placeholder="" maxLength={500} />
             <input type="file" accept="image/*" onChange={onFileChange} />
             <input type="submit" value="diary" />
             {attachment && (
@@ -131,12 +137,6 @@ const Home = ({ userObj }) => {
                 </div>
             ) }
         </form>
-        <div>
-            {days.map(day => (
-                // isOwner={day.creatorId === userObj} = 로그인 정보 대조
-                <Day key={day.id} dayObj={day} isOwner={day.creatorId === userObj.uid} />
-            ))}
-        </div>
     </div>
 }
 

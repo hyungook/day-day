@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { dbService, storageService } from '../../firebase'
+import styles from './day.module.css';
 
 const Day = ({dayObj, isOwner}) => {
 
@@ -34,12 +35,12 @@ const Day = ({dayObj, isOwner}) => {
     };
 
     return (
-        <div>
+        <div className={styles.div}>
             {
                 editing ? (
                     <>
-                        <form onSubmit={onSubmit}>
-                            <input type="text" placeholder="Edit " value={newDay} required onChange={onChange} />
+                        <form onSubmit={onSubmit} className={styles.form}>
+                            <input type="text" placeholder="Edit" value={newDay} required onChange={onChange} />
                             <input type="submit" value="Update" />
                         </form>
                         <button onClick={onEditClick}>cancel</button>

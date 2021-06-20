@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/login/login';
 import firebase, {authService} from './firebase';
+import './app.css';
 
 const App = () => {
   
@@ -66,7 +67,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <section className="section">
       {/* <Router>
         <Switch>
           {isSignIn ? (
@@ -83,7 +84,7 @@ const App = () => {
       {/* <Auth /> */}
       {init ? <AppRouter refreshUser={refreshUser} isSignIn={isSignIn} userObj={userObj}/> : "Initializing ..."}
       <footer>&copy; {new Date().getFullYear()} Day Day</footer>
-    </>
+    </section>
   );
 }
 

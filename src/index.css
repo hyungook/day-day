@@ -1,13 +1,39 @@
+@import "https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+input {
+  all: unset;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+/* button {
+  background-color: white;
+  color: black;
+} */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+form {
+  width: 100%;
 }
