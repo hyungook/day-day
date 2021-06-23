@@ -1,4 +1,10 @@
 .div {
+  border: 1px solid #ddd;
+  padding: 0.4rem;
+  margin-bottom: 8px;
+}
+.div:last-child {
+  margin-bottom: 0;
 }
 
 .form {

@@ -120,23 +120,30 @@ const Home = ({ userObj }) => {
     };
 
     return <div className={styles.container}>
+        <div className={styles.dayWrap}>
+            <form onSubmit={onSubmit} className={styles.dayForm}>
+                {/* <input className={styles.dayText} value={day} onChange={onChange} type="text" placeholder="" maxLength={500} /> */}
+                <textarea className={styles.dayText} value={day} onChange={onChange} placeholder="" maxLength={500}></textarea>
+                <label for="attach-file" className={styles.dayImg}>
+                    <span>Add photos +</span>
+                </label>
+                <input id="attach-file" type="file" accept="image/*" onChange={onFileChange} style={{display:"none"}} />
+                <input className={styles.daySubmit} type="submit" value="diary" />
+                {attachment && (
+                    <div>
+                        <img src={attachment} width="50px" height="50px" />
+                        <button onClick={clearAttachment}>Cancel upload</button>
+                    </div>
+                ) }
+            </form>
+        </div>
         <div className={styles.days}>
             {days.map(day => (
                 // isOwner={day.creatorId === userObj} = 로그인 정보 대조
                 <Day key={day.id} dayObj={day} isOwner={day.creatorId === userObj.uid} />
             ))}
         </div>
-        <form onSubmit={onSubmit} className={styles.dayForm}>
-            <input className={styles.dayText} value={day} onChange={onChange} type="text" placeholder="" maxLength={500} />
-            <input type="file" accept="image/*" onChange={onFileChange} />
-            <input type="submit" value="diary" />
-            {attachment && (
-                <div>
-                    <img src={attachment} width="50px" height="50px" />
-                    <button onClick={clearAttachment}>Cancel upload</button>
-                </div>
-            ) }
-        </form>
+        
     </div>
 }
 
