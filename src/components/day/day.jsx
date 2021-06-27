@@ -47,8 +47,8 @@ const Day = ({dayObj, isOwner}) => {
                     </>
                 ) : (
                     <>
-                        <h4>{dayObj.text}</h4>
-                        {dayObj.attachmentUrl && <img src={dayObj.attachmentUrl} width="50px" height="50px" />}
+                        {dayObj.attachmentUrl && <div className={styles.imgBox}><img src={dayObj.attachmentUrl} className={styles.img} /></div>}
+                        <h4 className={styles.h4}>{dayObj.text}</h4>
                         {dayObj.date}
                         {isOwner && (
                             <>

@@ -83,7 +83,7 @@ const App = () => {
       </Router> */}
       {/* <Auth /> */}
       {init ? <AppRouter refreshUser={refreshUser} isSignIn={isSignIn} userObj={userObj}/> : "Initializing ..."}
-      <footer>&copy; {new Date().getFullYear()} Day Day</footer>
+      {/* <footer>&copy; {new Date().getFullYear()} Day Day</footer> */}
     </section>
   );
 }

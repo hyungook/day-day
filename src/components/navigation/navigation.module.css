@@ -1,8 +1,11 @@
 nav {
+  position: absolute;
   width: 100%;
   /* min-width: 640px; */
   height: 46px;
   border-bottom: 1px solid #ebebeb;
+
+  background-color: #fff;
 }
 .navUl {
   width: 100%;

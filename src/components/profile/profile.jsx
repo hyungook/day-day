@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { authService, dbService } from '../../firebase'
 import { useHistory } from 'react-router-dom';
+import styles from './profile.module.css';
 
 const Profile = ({refreshUser, userObj}) => {
 
@@ -47,9 +48,9 @@ const Profile = ({refreshUser, userObj}) => {
     }
 
     return <>
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className={styles.form}>
         <input type="text" placeholder="Display name" value={newDisplayName} onChange={onChange} />
-        <input type="submit" value="Update Prifile" />
+        <input type="submit" value="Update Profile" />
     </form>
         <button onClick={onLogOutClick}>Log Out</button>
     </>

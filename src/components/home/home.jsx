@@ -136,6 +136,7 @@ const Home = ({ userObj }) => {
                     </div>
                 ) }
             </form>
+            <footer>&copy; {new Date().getFullYear()} Day Day</footer>
         </div>
         <div className={styles.days}>
             {days.map(day => (
